@@ -109,29 +109,9 @@ body {
 			<div id="status-notice"></div>
 		</div>
 
+		<script src="index.js"></script>
 		<script>
-(function(){
-  var _fetch = window.fetch.bind(window);
-  window.fetch = function(url, opts){
-    var u = (typeof url === 'string') ? url : (url && url.url) || '';
-    if (u.split('?')[0].endsWith('index.wasm')) {
-      var parts = ['index.wasm.00','index.wasm.01','index.wasm.02','index.wasm.03'];
-      return Promise.all(parts.map(function(p){ return _fetch(p); })).then(function(rs){
-        return Promise.all(rs.map(function(r){ return r.arrayBuffer(); }));
-      }).then(function(bufs){
-        var total = 0; bufs.forEach(function(b){ total += b.byteLength; });
-        var all = new Uint8Array(total); var off = 0;
-        bufs.forEach(function(b){ all.set(new Uint8Array(b), off); off += b.byteLength; });
-        return new Response(all, {status: 200, headers: {'Content-Type': 'application/wasm'}});
-      });
-    }
-    return _fetch(url, opts);
-  };
-})();
-</script>
-<script src="index.js"></script>
-		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":175984,"index.wasm":43699190},"focusCanvas":true,"gdextensionLibs":[]};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":175856,"index.wasm":43699190},"focusCanvas":true,"gdextensionLibs":[]};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
 
